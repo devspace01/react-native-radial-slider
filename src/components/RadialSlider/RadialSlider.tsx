@@ -7,7 +7,7 @@ import Svg, {
   Circle,
   NumberProp,
 } from 'react-native-svg';
-import { View, Platform, StyleSheet } from 'react-native';
+import { View, Platform, StyleSheet, Image } from 'react-native';
 import type { RadialSliderProps } from './types';
 import { styles } from './styles';
 import { Colors } from '../../theme';
@@ -47,6 +47,7 @@ const RadialSlider = (props: RadialSliderProps & typeof defaultProps) => {
     leftIconStyle,
     rightIconStyle,
     stroke,
+    thumbImage,
   } = props;
 
   const { panResponder, value, setValue, curPoint, currentRadian, prevValue } =
@@ -123,6 +124,8 @@ const RadialSlider = (props: RadialSliderProps & typeof defaultProps) => {
     : 0;
 
   const strokeLinecap = isRadialCircleVariant ? 'square' : 'round';
+  const cx = curPoint.x + circleXPosition;
+  const cy = curPoint.y;
 
   return (
     <View
@@ -186,6 +189,23 @@ const RadialSlider = (props: RadialSliderProps & typeof defaultProps) => {
           </>
         )}
       </Svg>
+      <View
+      style={{
+          position: 'absolute',
+          left: cx - (cx  / 12), // Adjust the positioning as per your requirement
+        top: cy - (cy <= 25 ? 12 : cy <= 50 ? 16 : 18)
+      }}
+      {...panResponder.panHandlers}>
+      {thumbImage ? <Image
+      style={{
+        width: 20, // Adjust the width and height as per your requirement
+        height: thumbRadius * 2,
+        
+      }}
+      resizeMode="contain"
+        source={thumbImage} // Replace 'path/to/your/image.png' with the actual path to your PNG image
+      /> : null}
+      </View>
       <View style={[styles.content, contentStyle]} pointerEvents="box-none">
         {/* Center Content */}
         {!isHideCenterContent && <CenterContent {...props} value={value} />}
