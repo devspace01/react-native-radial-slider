@@ -30,6 +30,7 @@ const useSilderAnimation = (props: RadialSliderAnimationHookProps) => {
     onChange = () => {},
     max = 100,
     onComplete = () => {},
+    onStart = () => {},
   } = props;
 
   let moveStartValue: number;
@@ -135,6 +136,13 @@ const useSilderAnimation = (props: RadialSliderAnimationHookProps) => {
     onComplete(prevValue.current);
   };
 
+  const handlePanStart = () => {
+    if (disabled) {
+        return;
+    }
+    onStart(value);
+}
+
   const panResponder = useRef(
     PanResponder.create({
       onStartShouldSetPanResponder: () => true,
@@ -144,6 +152,7 @@ const useSilderAnimation = (props: RadialSliderAnimationHookProps) => {
       onPanResponderRelease: handlePanResponderEnd,
       onPanResponderTerminationRequest: () => false,
       onPanResponderTerminate: handlePanResponderEnd,
+      onPanResponderStart: handlePanStart,
     })
   ).current;
 

@@ -92,7 +92,8 @@ export type RadialSliderAnimationHookProps = {
   value: number;
   thumbImage?: number | {
     uri: string
-  }
+  };
+  onStart: (v: number) => void;
 };
 
 export type NeedleContentProps = {
