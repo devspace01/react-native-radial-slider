@@ -75,7 +75,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,ts,tsx}": [
-      "eslint"
+      "eslint --fix"
     ]
   },
   "eslintIgnore": [
