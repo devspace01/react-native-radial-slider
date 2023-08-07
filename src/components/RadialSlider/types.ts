@@ -1,4 +1,9 @@
-import type { ViewStyle, TextStyle, StyleProp } from 'react-native';
+import type {
+  ViewStyle,
+  TextStyle,
+  StyleProp,
+  ImageSourcePropType,
+} from 'react-native';
 import type { Linecap } from 'react-native-svg';
 
 type RadialSliderExcludedProps = {
@@ -90,10 +95,8 @@ export type RadialSliderAnimationHookProps = {
   onChange?: (v: number) => void;
   onComplete?: (v: number) => void;
   value: number;
-  thumbImage?: number | {
-    uri: string
-  };
-  onStart: (v: number) => void;
+  thumbImage?: ImageSourcePropType;
+  onStart?: (v: number) => void;
 };
 
 export type NeedleContentProps = {
@@ -297,6 +300,7 @@ export type RadialSliderProps = {
    * Color for icon
    */
   stroke?: string;
+  thumbImage?: ImageSourcePropType;
 };
 
 export interface ButtonProps {

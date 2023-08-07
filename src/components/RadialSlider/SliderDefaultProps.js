@@ -1,0 +1,43 @@
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+exports.defaultProps = void 0;
+var theme_1 = require('../../theme');
+exports.defaultProps = {
+  radius: 100,
+  min: 0,
+  max: 100,
+  step: 1,
+  value: 0,
+  title: '',
+  subTitle: 'Goal',
+  unit: 'kCal',
+  thumbRadius: 18,
+  thumbColor: theme_1.Colors.blue,
+  thumbBorderWidth: 5,
+  thumbBorderColor: theme_1.Colors.white,
+  markerLineSize: 50,
+  sliderWidth: 18,
+  sliderTrackColor: theme_1.Colors.grey,
+  lineColor: theme_1.Colors.grey,
+  lineSpace: 3,
+  linearGradient: [
+    { offset: '0%', color: theme_1.Colors.skyBlue },
+    { offset: '100%', color: theme_1.Colors.darkBlue },
+  ],
+  onChange: function (_v) {},
+  onComplete: function (_v) {},
+  openingRadian: Math.PI / 3,
+  disabled: false,
+  isHideSlider: false,
+  isHideTitle: false,
+  isHideSubtitle: false,
+  isHideValue: false,
+  isHideTailText: false,
+  isHideButtons: false,
+  isHideLines: false,
+  isHideMarkerLine: false,
+  isHideCenterContent: false,
+  fixedMarker: false,
+  variant: 'default',
+  markerValueInterval: 10,
+};
