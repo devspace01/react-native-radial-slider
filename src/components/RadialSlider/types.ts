@@ -94,9 +94,9 @@ export type RadialSliderAnimationHookProps = {
   max?: number;
   onChange?: (v: number) => void;
   onComplete?: (v: number) => void;
+  onStart?: (v: number) => void;
   value: number;
   thumbImage?: ImageSourcePropType;
-  onStart?: (v: number) => void;
 };
 
 export type NeedleContentProps = {
@@ -209,6 +209,10 @@ export type RadialSliderProps = {
    */
   onComplete?: (v: number) => void;
   /**
+   * Callback function which defines what to do after start.
+   */
+  onStart?: (v: number) => void;
+  /**
    * Center content styling.
    */
   centerContentStyle?: StyleProp<ViewStyle>;
@@ -300,6 +304,9 @@ export type RadialSliderProps = {
    * Color for icon
    */
   stroke?: string;
+  /**
+   * User defined thumb Image
+   */
   thumbImage?: ImageSourcePropType;
 };
 

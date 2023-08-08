@@ -138,10 +138,10 @@ const useSilderAnimation = (props: RadialSliderAnimationHookProps) => {
 
   const handlePanStart = () => {
     if (disabled) {
-        return;
+      return;
     }
     onStart(value);
-}
+  };
 
   const panResponder = useRef(
     PanResponder.create({
