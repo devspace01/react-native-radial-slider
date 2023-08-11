@@ -48,8 +48,8 @@ const RadialSlider = (props: RadialSliderProps & typeof defaultProps) => {
     rightIconStyle,
     stroke,
     thumbImage,
-    numberOfSteps,
-    onDotPress
+    numberOfSteps = 0,
+    onDotPress = () => {},
   } = props;
 
   const { panResponder, value, setValue, curPoint, currentRadian, prevValue } =
@@ -129,46 +129,41 @@ const RadialSlider = (props: RadialSliderProps & typeof defaultProps) => {
   const cx = curPoint.x + circleXPosition;
   const cy = curPoint.y;
 
-  const calculateDotValue = (dotIndex) => {
+  const calculateDotValue = (dotIndex: number) => {
     // Example: Each dot corresponds to a multiple of 20
-    return (dotIndex+1) * 20;
+    return (dotIndex + 1) * 20;
   };
 
-const Radius = 100;
-const centerX = 124; // Adjust centerX to position the semicircle
-const centerY = 124;
-const dotCount = numberOfSteps;
-const dots = [];
-const startAngle = Math.PI; // 180 degrees (starting from the left)
-const endAngle = 2 * Math.PI; // 360 degrees (ending at the left)
+  const Radius = 100;
+  const centerX = 124; // Adjust centerX to position the semicircle
+  const centerY = 124;
+  const dotCount = numberOfSteps;
+  const dots = [];
+  const startAngle = Math.PI; // 180 degrees (starting from the left)
+  const endAngle = 2 * Math.PI; // 360 degrees (ending at the left)
 
-for (let i = 0; i < dotCount; i++) {
-  const angle = startAngle + (i / (dotCount - 1)) * (endAngle - startAngle);
-  const x = centerX + Radius * Math.cos(angle);
-  const y = centerY + Radius * Math.sin(angle);
-   
-  const dotValue = calculateDotValue(i);
+  for (let i = 0; i < dotCount; i++) {
+    const angle = startAngle + (i / (dotCount - 1)) * (endAngle - startAngle);
+    const x = centerX + Radius * Math.cos(angle);
+    const y = centerY + Radius * Math.sin(angle);
 
-  dots.push(
-    <View>
-      <Circle
-        cx={x}
-        cy={y}
-        r={20}
-        onPress={() => {
+    const dotValue = calculateDotValue(i);
+
+    dots.push(
+      <View>
+        <Circle
+          cx={x}
+          cy={y}
+          r={20}
+          onPress={() => {
             onDotPress(dotValue);
           }}
-        fill={"transparent"}
-      />
-      <Circle
-        cx={x}
-        cy={y}
-        r={6}
-        fill={thumbBorderColor || thumbColor}
-      />
+          fill={'transparent'}
+        />
+        <Circle cx={x} cy={y} r={6} fill={thumbBorderColor || thumbColor} />
       </View>
-  );
-}
+    );
+  }
 
   return (
     <View
@@ -234,21 +229,22 @@ for (let i = 0; i < dotCount; i++) {
         )}
       </Svg>
       <View
-      style={{
+        style={{
           position: 'absolute',
-          left: cx - (cx  / 12), // Adjust the positioning as per your requirement
-        top: cy - (cy <= 25 ? 12 : cy <= 50 ? 16 : 18)
-      }}
-      {...panResponder.panHandlers}>
-      {thumbImage ? <Image
-      style={{
-        width: 20, // Adjust the width and height as per your requirement
-        height: thumbRadius * 2,
-        
-      }}
-      resizeMode="contain"
-        source={thumbImage} // Replace 'path/to/your/image.png' with the actual path to your PNG image
-      /> : null}
+          left: cx - cx / 12, // Adjust the positioning as per your requirement
+          top: cy - (cy <= 25 ? 12 : cy <= 50 ? 16 : 18),
+        }}
+        {...panResponder.panHandlers}>
+        {thumbImage ? (
+          <Image
+            style={{
+              width: 20, // Adjust the width and height as per your requirement
+              height: thumbRadius * 2,
+            }}
+            resizeMode="contain"
+            source={thumbImage} // Replace 'path/to/your/image.png' with the actual path to your PNG image
+          />
+        ) : null}
       </View>
       <View style={[styles.content, contentStyle]} pointerEvents="box-none">
         {/* Center Content */}
