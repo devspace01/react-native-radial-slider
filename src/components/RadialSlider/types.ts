@@ -308,6 +308,14 @@ export type RadialSliderProps = {
    * User defined thumb Image
    */
   thumbImage?: ImageSourcePropType;
+  /**
+     * User defined steps
+     */
+  numberOfSteps?: number
+     /**
+     * Callback function which defines what to do onPress on Dots.
+     */
+    onDotPress?: (v: number) => void;
 };
 
 export interface ButtonProps {

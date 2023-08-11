@@ -48,6 +48,8 @@ const RadialSlider = (props: RadialSliderProps & typeof defaultProps) => {
     rightIconStyle,
     stroke,
     thumbImage,
+    numberOfSteps,
+    onDotPress
   } = props;
 
   const { panResponder, value, setValue, curPoint, currentRadian, prevValue } =
@@ -127,6 +129,47 @@ const RadialSlider = (props: RadialSliderProps & typeof defaultProps) => {
   const cx = curPoint.x + circleXPosition;
   const cy = curPoint.y;
 
+  const calculateDotValue = (dotIndex) => {
+    // Example: Each dot corresponds to a multiple of 20
+    return (dotIndex+1) * 20;
+  };
+
+const Radius = 100;
+const centerX = 124; // Adjust centerX to position the semicircle
+const centerY = 124;
+const dotCount = numberOfSteps;
+const dots = [];
+const startAngle = Math.PI; // 180 degrees (starting from the left)
+const endAngle = 2 * Math.PI; // 360 degrees (ending at the left)
+
+for (let i = 0; i < dotCount; i++) {
+  const angle = startAngle + (i / (dotCount - 1)) * (endAngle - startAngle);
+  const x = centerX + Radius * Math.cos(angle);
+  const y = centerY + Radius * Math.sin(angle);
+   
+  const dotValue = calculateDotValue(i);
+
+  dots.push(
+    <View>
+      <Circle
+        cx={x}
+        cy={y}
+        r={20}
+        onPress={() => {
+            onDotPress(dotValue);
+          }}
+        fill={"transparent"}
+      />
+      <Circle
+        cx={x}
+        cy={y}
+        r={6}
+        fill={thumbBorderColor || thumbColor}
+      />
+      </View>
+  );
+}
+
   return (
     <View
       onLayout={onLayout}
@@ -186,6 +229,7 @@ const RadialSlider = (props: RadialSliderProps & typeof defaultProps) => {
               strokeWidth={thumbBorderWidth}
               {...panResponder.panHandlers}
             />
+            {dots}
           </>
         )}
       </Svg>
