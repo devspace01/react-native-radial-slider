@@ -150,7 +150,7 @@ const RadialSlider = (props: RadialSliderProps & typeof defaultProps) => {
     const dotValue = calculateDotValue(i);
 
     dots.push(
-      <View>
+      <>
         <Circle
           cx={x}
           cy={y}
@@ -161,7 +161,7 @@ const RadialSlider = (props: RadialSliderProps & typeof defaultProps) => {
           fill={'transparent'}
         />
         <Circle cx={x} cy={y} r={6} fill={thumbBorderColor || thumbColor} />
-      </View>
+      </>
     );
   }
 
